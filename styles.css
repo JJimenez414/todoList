@@ -81,7 +81,7 @@ ul li::before{
     
 }
 
-ul li:hover{
+.hoverClass:hover{
     background-color: #ebecf0;
 }
 
@@ -102,7 +102,6 @@ ul li:hover{
 }
 
 .listItem {
-    color: blue;
 }
 
 .inputItem {
@@ -140,6 +139,15 @@ ul li:hover{
     display: none;
     position: absolute;
 }
+
+.showItems > ul{
+    position: relative;
+}
+
+.alertTodo {
+    margin: 5px 0 0 0;
+}
+
 .calendar {
     border-radius: 0;
     grid-column: span 3;

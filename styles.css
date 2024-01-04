@@ -1,0 +1,147 @@
+body {
+    background-color: white;
+}
+
+
+.container {
+    position: relative;
+    display: grid;
+    width: 100%;
+    height: 80vh;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.layoutBase {
+    color: black;
+    border-radius: 7%;
+    border: solid 2px black;
+    margin: 20px 10px 20px 10px;
+}
+
+.box-shadow {
+    box-shadow: 3px 3px 3px grey;
+}
+
+.title {
+    margin: 10px;
+    text-align: center;
+    border-bottom: 2px solid black;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.title > p {
+    margin-bottom: 10px;
+}
+
+/* start of todo list styling */
+.todo-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.items {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.item {
+    font-family: 'IBM Plex Mono', monospace;
+    display: flex;
+    align-items: center;
+    transform: color 0.15s;
+}
+
+ul li {
+    list-style-type: none;
+    position: relative;
+    height: auto;
+    width: 330px;
+    padding: 0px 0px 5px 30px;
+    white-space: pre-wrap;
+}
+
+ul li::before{
+    /* font-family: 'IBM Plex Mono', monospace; */ 
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    background-image: url("/unchecked.png");
+    /* background-size: coveer => makes sure the image covers the background with out
+    streatching or modifying its scale   */
+    background-size: cover;
+    background-position: center;
+    top: 3px;
+    left: 3px
+    
+}
+
+ul li:hover{
+    background-color: #ebecf0;
+}
+
+.checked::before {
+     /* font-family: 'IBM Plex Mono', monospace; */ 
+     content: "";
+     position: absolute;
+     height: 20px;
+     width: 20px;
+     border-radius: 100%;
+     background-image: url("/checkbox.png");
+     /* background-size: coveer => makes sure the image covers the background with out
+     streatching or modifying its scale   */
+     background-size: cover;
+     background-position: center;
+     top: 3px;
+     left: 3px
+}
+
+.listItem {
+    color: blue;
+}
+
+.inputItem {
+    position: absolute;
+    width: 100%;
+    bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.alerts {
+    display: flex;
+    flex-direction: column;
+}
+
+.alertSection {
+    border-left: 2px solid black ;
+    border-bottom: 2px solid black;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.alertSection > p {
+    padding: 0; 
+    margin: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    
+}
+
+/* Hide the content when the website is first opened */
+.alertSection > ul {
+    display: none;
+    position: absolute;
+}
+.calendar {
+    border-radius: 0;
+    grid-column: span 3;
+}
+

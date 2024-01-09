@@ -21,10 +21,19 @@ $(document).on("click", ".listItem", function() {
 });
 
 //label section - make it for it to appear when label clicked.
-$(".alertSection").click(function() {
-    if(!$(this).hasClass(".showItems")) {
-        $(this).addClass(".showItems");
-        console.log("hello world");
-    }
+$(".alertLabel").click(function() {
+
+    //reference: https://stackoverflow.com/questions/27143063/jquery-how-to-add-class-to-the-child-element
+    //closest: findes the closest parent div to the element.
+    //find: finds the elements that have the class .alertTodo.
+    //addClass: adds the clas hide Items to the element. 
+
+    if($(this).closest("div").find(".alertTodo").hasClass("hideItems"))
+     {
+        $(this).closest("div").find(".alertTodo").removeClass("hideItems");
+     } else {
+        $(this).closest("div").find(".alertTodo").addClass("hideItems");
+     }
+
 });
 

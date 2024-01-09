@@ -16,6 +16,7 @@ body {
     border-radius: 7%;
     border: solid 2px black;
     margin: 20px 10px 20px 10px;
+    height: 100%;
 }
 
 .box-shadow {
@@ -51,8 +52,7 @@ body {
 .item {
     font-family: 'IBM Plex Mono', monospace;
     display: flex;
-    align-items: center;
-    transform: color 0.15s;
+    align-items: center;   
 }
 
 ul li {
@@ -62,6 +62,7 @@ ul li {
     width: 330px;
     padding: 0px 0px 5px 30px;
     white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 ul li::before{
@@ -116,37 +117,42 @@ ul li::before{
 
 .alerts {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+    overflow: auto;
 }
 
+
+/*allert section */
+
 .alertSection {
+    height: auto;
+    width: auto;
     border-left: 2px solid black ;
     border-bottom: 2px solid black;
     margin: 10px;
     padding: 10px;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
-.alertSection > p {
+.alertLabel {
     padding: 0; 
     margin: 0;
     font-family: 'IBM Plex Mono', monospace;
     
 }
 
-/* Hide the content when the website is first opened */
-.alertSection > ul {
+.hideItems {
     display: none;
-    position: absolute;
-}
-
-.showItems > ul{
     position: relative;
 }
 
 .alertTodo {
     margin: 5px 0 0 0;
 }
+
+/*calander section */
 
 .calendar {
     border-radius: 0;

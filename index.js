@@ -22,19 +22,26 @@ const db = new pg.Client({
 db.connect();
 
 //get the list that you want and save it in result
-const result = await db.query("SELECT item FROM list");
-
-app.get("/", (req, res) => {
-    //a list that we will store on the items that the user enters
-    const arrItems = [];
+//SELECT <column> FROM <table>
+async function listOfItems() {
+    const result = await db.query("SELECT item FROM list");
+    //a list that we will store on the items that the user enters   
+    let arrItems = [];
     //filter the items from the list and save it int the arrItems
     result.rows.forEach((items) => {
         arrItems.push(items.item);
-    });
+    })
 
+    return arrItems;
+}
 
-    res.render("index.ejs", {items: dicItems});
-})
+app.get("/", async (req, res) => {
+    //call the function
+    const Items = await listOfItems();
+    
+    res.render("index.ejs", {items: Items});
+});
+
 
 
 app.post("/newItem", (req, res) => {
@@ -42,8 +49,13 @@ app.post("/newItem", (req, res) => {
    we are rendering index.ejs and we are passing the variable TITLE to it with the information
    gathered by the reques made by item in 
   */  
-    res.render("index.ejs", {title: req.body["item"]})
-    console.log(req.body);
+    const newItem = req.body["item"];
+    /*
+        INSERT INTO <table> (column1, column2)
+        VALUES (value1, value 2)
+    */
+    db.query("INSERT INTO list (item) VALUES ($1)", [newItem]);
+    res.redirect("/");
 });
 
 app.listen(3000, () => {
@@ -93,4 +105,4 @@ app.listen(3000, () => {
 //NOTES: 
 // - node.js and express are used to create a server
 // - EJS is to create templates
-//  - EJS we need a folder called public for all static files such as img and styling (CSS)
+// - EJS we need a folder called public for all static files such as img and styling (CSS)

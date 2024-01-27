@@ -27,13 +27,18 @@
                 <div class="item">
                     <div class="">    
                         <ul>
-                            <% if (locals.items) { %>
-                                <% for(let i = 0; i < items.length; i++) { %>
-                                    <li>
-                                        <%= items[i] %>
-                                    </li>
+                            <form action="/deleteItem" method="post">
+                                <!-- onclick event will send the post request. however, it will reload the page entirely. we will need to
+                                use ajax in order to prevent that from happening. -->
+                                <input type="checkbox" name="delete" onclick="this.form.submit()">   
+                            </form>
+                                <% if (locals.items) { %>
+                                    <% for(let i = 0; i < items.length; i++) { %>
+                                        <li>
+                                            <%= items[i] %>
+                                        </li>
+                                    <% } %>
                                 <% } %>
-                            <% } %>
                         </ul>
                     </div>
                 </div>
@@ -91,6 +96,7 @@
         </div>
     </div> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="jquery.js" charset="utf-8"></script>
     <script src="index.js" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>

@@ -59,8 +59,12 @@ app.post("/newItem", (req, res) => {
 });
 
 app.post("/deleteItem", (req, res) => {
-    console.log("hello");
+    const dItem = req.body.delete;
+    db.query("DELETE FROM list WHERE item=($1)", [dItem]);
+    res.redirect("/");
 });
+
+
 
 app.listen(3000, () => {
     console.log("Server running...");

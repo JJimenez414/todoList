@@ -24,26 +24,23 @@
             </div>
 
             <div class="items">    
-                <div class="item">
-                    <div class="">    
-                        <ul>
-                            <form action="/deleteItem" method="post">
-                                <!-- onclick event will send the post request. however, it will reload the page entirely. we will need to
-                                use ajax in order to prevent that from happening. -->
-                                <input type="checkbox" name="delete" onclick="this.form.submit()">   
-                            </form>
-                                <% if (locals.items) { %>
-                                    <% for(let i = 0; i < items.length; i++) { %>
-                                        <li>
-                                            <%= items[i] %>
-                                        </li>
-                                    <% } %>
-                                <% } %>
-                        </ul>
-                    </div>
+                <div class="item"> 
+                    <form action="/deleteItem" method="post">
+                        <!-- onclick event will send the post request. however, it will reload the page entirely. we will need to
+                        use ajax in order to prevent that from happening. --> 
+                        <% if (locals.items) { %>
+                            <% for(let i = 0; i < items.length; i++) { %>
+                                <div class="inputContainer">
+                                    <input type="checkbox" name="delete" class="checkbox" value="<%= items[i] %>" onchange="this.form.submit()">
+                                        <!-- vale=items[i] is the value that will be returned to the server. --> 
+                                    <label class="label" for="delete" onclick="this.form.submit()"> <%=items[i] %> </label>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </form>
                 </div>
             </div>
-
+ 
             <div class="inputItem">
                 <form action="/newItem" method="post" class="row p-3 g-3">
                     <div class="col-auto">

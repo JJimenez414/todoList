@@ -61,6 +61,7 @@ app.post("/newItem", (req, res) => {
 app.post("/deleteItem", (req, res) => {
     const dItem = req.body.delete;
     db.query("DELETE FROM list WHERE item=($1)", [dItem]);
+    db.query("INSERT INTO deletedItems (item) VALUES ($1)", [dItem]);
     res.redirect("/");
 });
 

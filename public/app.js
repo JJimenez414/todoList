@@ -23,8 +23,8 @@ $(".alertLabel").click(function() {
      }
 
 });
-//reference
 
+//reference
 //https://www.youtube.com/watch?v=Z-PmnpCTZ64
 $(".checkbox").change(function() {
     let delItem = $(this).val();
@@ -35,7 +35,8 @@ $(".checkbox").change(function() {
         contentType: "application/json",
         data: JSON.stringify({items: delItem}),
         success: function(res) {
-            console.log("Success.");
+            $("#itemsContainer").html(res);
+            console.log("hi.");
         }
     })
         .done((data) => {

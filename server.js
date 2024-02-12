@@ -50,7 +50,7 @@ async function listOfdItems() {
 app.get("/", async (req, res) => {
     //call the function
     const Items = await listOfItems();
-    
+
     res.render("index.ejs", {items: Items});
 });
 
@@ -76,7 +76,7 @@ app.post("/deleteItem", jsonParser, (req, res) => {
     console.log(dItem);
     db.query("DELETE FROM list WHERE item=($1)", [dItem]);
     db.query("INSERT INTO deletedItems (item) VALUES ($1)", [dItem]);
-    res.redirect("/");
+    res.render('index.ejs', { items: dItem })
 });
 
 app.post("/returnItem", async (req,res) => {
@@ -84,8 +84,8 @@ app.post("/returnItem", async (req,res) => {
     let dItem = await listOfdItems();
     db.query("INSERT INTO list (item) VALUES ($1)", [dItem[0]]);
     db.query("DELETE FROM deleteditems WHERE item=($1)", [dItem[0]]);
-    res.redirect("/");
-});
+    res.redirect('back');
+}); 
 
 app.post("/note", (req, res) => {
     let note = req.body.note;

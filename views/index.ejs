@@ -16,7 +16,17 @@
 </head>
 <body>   
     <div class="container">
-        <div class="unknown layoutBase box-shadow">
+        <div class="layoutBase box-shadow">
+            <div class="title">
+                <p class="">Notes</p>
+            </div>
+            <form action="/note" method="post">
+                <div class="notesDiv">
+                    <textarea name="note" type="text" class="notes" id="notes" placeholder="Note:"></textarea>
+                    <button name="enter" type="submit" id="btnNotes" class=" btn-round"></button>
+                </div>
+            </form>
+
         </div>
     
         <div class="todo-list layoutBase list box-shadow">
@@ -26,15 +36,16 @@
 
             <div class="items">    
                 <div class="item"> 
-                    <form action="/deleteItem" method="post">
+                    <form action="/deleteItem" method="post" id="formDelete">
                         <!-- onclick event will send the post request. however, it will reload the page entirely. we will need to
                         use ajax in order to prevent that from happening. --> 
                         <% if (locals.items) { %>
                             <% for(let i = 0; i < items.length; i++) { %>
                                 <div class="inputContainer hoverClass">
-                                    <input type="checkbox" name="delete" class="checkbox" value="<%= items[i] %>" onchange="this.form.submit()">
+                                    <!-- onchange="this.form.submit()" -->
+                                    <input type="checkbox" name="delete" class="checkbox"  value="<%=items[i]%>">
                                         <!-- vale=items[i] is the value that will be returned to the server. --> 
-                                    <label class="label" for="delete" onclick="click()"> <%=items[i] %> </label>
+                                    <label class="label" for="delete"> <%=items[i] %> </label>
                                 </div>
                             <% } %>
                         <% } %>
@@ -92,16 +103,10 @@
                 </ul>
             </div>
         </div>
-    
-        <div class="calendar layoutBase">
-            <div class="title">
-                <p class="">Calendar</p>
-            </div>
-        </div>
     </div> 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/app.js" charset="utf-8"></script>
-    <script src="server.js" charset="utf-8"></script>
+    <script src="/todoList/server.js" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

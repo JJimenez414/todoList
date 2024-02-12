@@ -10,6 +10,8 @@ const app = express();
 app.use(bodyParser.urlencoded({extended:true}));
 //telling express where to get static files
 app.use(express.static(__dirname + "/public"));
+//json parser
+var jsonParser = bodyParser.json();
 //connecting to db in from pgadmin
 const db = new pg.Client({
     user: "postgres",
@@ -60,6 +62,7 @@ app.post("/newItem", (req, res) => {
    gathered by the reques made by item in 
   */  
     const newItem = req.body["item"];
+    console.log(newItem);
     /*
         INSERT INTO <table> (column1, column2)
         VALUES (value1, value 2)
@@ -68,17 +71,13 @@ app.post("/newItem", (req, res) => {
     res.redirect("/");
 });
 
-app.post("/deleteItem", (req, res) => {
-    const dItem = req.body.delete;
-    console.log(dItem + "space");
+app.post("/deleteItem", jsonParser, (req, res) => {
+    let dItem = req.body.items;
+    console.log(dItem);
     db.query("DELETE FROM list WHERE item=($1)", [dItem]);
     db.query("INSERT INTO deletedItems (item) VALUES ($1)", [dItem]);
     res.redirect("/");
 });
-
-function click() {
-    console.log("Hello World");
-}
 
 app.post("/returnItem", async (req,res) => {
     
@@ -87,6 +86,12 @@ app.post("/returnItem", async (req,res) => {
     db.query("DELETE FROM deleteditems WHERE item=($1)", [dItem[0]]);
     res.redirect("/");
 });
+
+app.post("/note", (req, res) => {
+    let note = req.body.note;
+    console.log(note);
+    res.redirect("/");
+})
 
 
 

@@ -1,19 +1,3 @@
-//-------------------------------------------------------------------------------------------------
-//add item to the list
-console.log("hello world");
-
-$("#btnEnter").click(function() {
-    const newItem = $("#newItem").val();
-
-    if(newItem != "") {
-        $("ul").append($("<li></li>").append(newItem).addClass("listItem hoverClass"));
-
-        $("#newItem").val("");
-    } else {
-        alert("Invalid Input");
-    }
-});
-
 //if item is clicked we apply the checked class
 $(document).on("click", ".listItem", function() {
     if($(this).hasClass("checked")) {
@@ -39,10 +23,32 @@ $(".alertLabel").click(function() {
      }
 
 });
+//reference
 
-function click() {
-    console.log("hello world");
-}
+//https://www.youtube.com/watch?v=Z-PmnpCTZ64
+$(".checkbox").change(function() {
+    let delItem = $(this).val();
+
+    $.ajax({
+        type: "POST",
+        url: "/deleteItem",
+        contentType: "application/json",
+        data: JSON.stringify({items: delItem}),
+        success: function(res) {
+            console.log("Success.");
+        }
+    })
+        .done((data) => {
+            console.log("Data: " + delItem);
+        })
+        .fail((err) => {
+            console.error(err);
+        })
+        .always(() => {
+            console.log("always returned");
+        });
+});
+
 
 // NOTES: 
 // - node.js and express are used to create a server

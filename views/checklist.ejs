@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
+</head>
+
+<body> 
+    <div class="todo-list layoutBase list box-shadow">
+        <div class="title">
+            <p class="">Todo</p>
+        </div>
+
+        <div class="items">    
+            <div class="item"> 
+                <form action="/deleteItem" method="post" id="formDelete">
+                    <!-- onclick event will send the post request. however, it will reload the page entirely. we will need to
+                    use ajax in order to prevent that from happening. --> 
+                    <div id="checkboxesContainer">
+                    <% if (locals.items) { %>
+                        <% for(let i = 0; i < items.length; i++) { %>
+                            <div class="inputContainer hoverClass">
+                                <!-- onchange="this.form.submit()" -->
+                                <input type="checkbox" name="delete" class="checkbox"  value="<%=items[i]%>">
+                                    <!-- vale=items[i] is the value that will be returned to the server. --> 
+                                <label class="label" for="delete"> <%=items[i] %> </label>
+                            </div>
+                        <% } %>
+                    <% } %> 
+                </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="inputItem">
+            <form action="/newItem" method="post" class="row p-3 g-3">
+                <div class="col-auto">
+                    <input name="item" type="text" class="form-control-sm" id="newItem" placeholder="New Item">
+                </div>
+                <div class="col-auto">
+                    <button name="enter" type="submit" id="btnEnter" class="btn btn-dark btn-sm">Enter</button>
+                </div>
+            </form>
+
+            <form action="/returnItem" method="post">
+                <div class="col-auto">
+                    <button name="returnBtn" type="submit" class="bringBackBtn"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/app.js" charset="utf-8"></script>
+    <script src="/todoList/server.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>

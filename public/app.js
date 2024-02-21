@@ -28,6 +28,10 @@ $(".alertLabel").click(function() {
 //https://www.youtube.com/watch?v=Z-PmnpCTZ64
 $(".checkbox").change(function() {
     let delItem = $(this).val();
+    
+    $.get("/deleteInformation", function(data) {
+        $("#checkboxesContainer").html(data);
+    });
 
     $.ajax({
         type: "POST",
@@ -35,7 +39,7 @@ $(".checkbox").change(function() {
         contentType: "application/json",
         data: JSON.stringify({items: delItem}),
         success: function(res) {
-            $('#checkboxesContainer').load(res);
+            console.log("Success");
         }
     })
         .done((data) => {
@@ -47,6 +51,7 @@ $(".checkbox").change(function() {
         .always(() => {
             console.log("always returned");
         });
+
 });
 
 

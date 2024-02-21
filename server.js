@@ -50,7 +50,6 @@ async function listOfdItems() {
 app.get("/", async (req, res) => {
     //call the function
     const Items = await listOfItems();
-
     res.render("index.ejs", {items: Items});
 });
 
@@ -62,7 +61,6 @@ app.post("/newItem", (req, res) => {
    gathered by the reques made by item in 
   */  
     const newItem = req.body["item"];
-    console.log(newItem);
     /*
         INSERT INTO <table> (column1, column2)
         VALUES (value1, value 2)
@@ -73,16 +71,14 @@ app.post("/newItem", (req, res) => {
 
 app.post("/deleteItem", jsonParser, (req, res) => {
     let dItem = req.body.items;
-    console.log(dItem);
     db.query("DELETE FROM list WHERE item=($1)", [dItem]);
     db.query("INSERT INTO deletedItems (item) VALUES ($1)", [dItem]);
     res.redirect("/");
 });
 
 app.get("/deleteInformation", async(req,res) => {
-
-    console.log("Yes");
-    res.send(listOfItems());
+    const list = await listOfItems();
+    res.json(list);
 })
 
 

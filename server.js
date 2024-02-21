@@ -76,7 +76,7 @@ app.post("/deleteItem", jsonParser, (req, res) => {
     console.log(dItem);
     db.query("DELETE FROM list WHERE item=($1)", [dItem]);
     db.query("INSERT INTO deletedItems (item) VALUES ($1)", [dItem]);
-    res.render('checklist.ejs', { items: dItem })
+    res.render('checklist.ejs', { items: listOfdItems() })
 });
 
 app.post("/returnItem", async (req,res) => {
@@ -84,7 +84,8 @@ app.post("/returnItem", async (req,res) => {
     let dItem = await listOfdItems();
     db.query("INSERT INTO list (item) VALUES ($1)", [dItem[0]]);
     db.query("DELETE FROM deleteditems WHERE item=($1)", [dItem[0]]);
-    res.redirect('back');
+    ///check this part too
+    res.redirect('/');
 }); 
 
 app.post("/note", (req, res) => {

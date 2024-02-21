@@ -35,7 +35,7 @@ $(".checkbox").change(function() {
         contentType: "application/json",
         data: JSON.stringify({items: delItem}),
         success: function(res) {
-            $('#checkboxesContainer').html(res);
+            $('#checkboxesContainer').load(res);
         }
     })
         .done((data) => {

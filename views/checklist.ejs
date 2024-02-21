@@ -21,12 +21,12 @@
             <p class="">Todo</p>
         </div>
 
-        <div class="items">    
+        <div class="items" id="checkboxesContainer">    
             <div class="item"> 
                 <form action="/deleteItem" method="post" id="formDelete">
                     <!-- onclick event will send the post request. however, it will reload the page entirely. we will need to
                     use ajax in order to prevent that from happening. --> 
-                    <div id="checkboxesContainer">
+                    <div>
                     <% if (locals.items) { %>
                         <% for(let i = 0; i < items.length; i++) { %>
                             <div class="inputContainer hoverClass">

@@ -1,11 +1,4 @@
-//if item is clicked we apply the checked class
-$(document).on("click", ".listItem", function() {
-    if($(this).hasClass("checked")) {
-        $(this).removeClass("checked");
-    } else {
-        $(this).addClass("checked");
-    }
-});
+// let ajaxInProgress = false;
 
 //label section - make it for it to appear when label clicked.
 $(".alertLabel").click(function() {
@@ -13,7 +6,7 @@ $(".alertLabel").click(function() {
     //reference: https://stackove rflow.com/questions/27143063/jquery-how-to-add-class-to-the-child-element
     //closest: findes the closest parent div to the element.
     //find: finds the elements that have the class .alertTodo.
-    //addClass: adds the clas hide Items to the element. 
+    //addClass: adds the clas hide Items to the element.
 
     if($(this).closest("div").find(".alertTodo").hasClass("hideItems"))
      {
@@ -26,9 +19,10 @@ $(".alertLabel").click(function() {
 
 //reference
 //https://www.youtube.com/watch?v=Z-PmnpCTZ64
-$(".checkbox").change(function() {
-    let delItem = $(this).val();
+$("body").on("change", "#checkbox", function() {
 
+    let delItem = $(this).val();
+    $(".checkbox").off("change"); //unbind the event listener to prevent multiple calls
 
     $.ajax({
         type: "POST",
@@ -36,7 +30,7 @@ $(".checkbox").change(function() {
         contentType: "application/json",
         data: JSON.stringify({items: delItem}),
         success: function(res) {
-            $("#checkboxesContainer").html(hello);
+            $("#checkboxesContainer").html($(res).find("#checkboxesContainer").html());
         }
     })
         .done((data) => {
@@ -49,11 +43,31 @@ $(".checkbox").change(function() {
             console.log("always returned");
         });
 
-        $.get("/deleteInformation", function(data) {
-            $("#checkboxesContainer").load(location.href + '#checkboxesContainer', data);
-        });
-
 });
+
+$("body").on("click", "#btnEnter", function(){
+    let newItem = $("#newItem").val();
+    
+    $.ajax({
+        type: "POST",
+        url: "/newItem",
+        async: true,
+        contentType: "application/json",
+        data: JSON.stringify({newItem: newItem}),
+        success: function(res){
+            $("#checkboxesContainer").html($(res).find("#checkboxesContainer").html());
+        }
+    })
+        .done((data) => {
+            console.log("Data: " + newItem);
+        })
+        .fail((err) => {
+            console.error(err);
+        })
+        .always(() => {
+            console.log("new always returned");
+        });
+})
 
 
 // NOTES: 

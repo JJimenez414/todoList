@@ -23,34 +23,30 @@
 
         <div class="items" id="checkboxesContainer">    
             <div class="item"> 
-                <form action="/deleteItem" method="post" id="formDelete">
-                    <!-- onclick event will send the post request. however, it will reload the page entirely. we will need to
-                    use ajax in order to prevent that from happening. --> 
-                    <div>
-                    <% if (locals.items) { %>
-                        <% for(let i = 0; i < items.length; i++) { %>
-                            <div class="inputContainer hoverClass">
-                                <!-- onchange="this.form.submit()" -->
-                                <input type="checkbox" name="delete" class="checkbox"  value="<%=items[i]%>">
-                                    <!-- vale=items[i] is the value that will be returned to the server. --> 
-                                <label class="label" for="delete"> <%=items[i] %> </label>
-                            </div>
-                        <% } %>
-                    <% } %> 
-                </div>
-                </form>
+                <!-- onclick event will send the post request. however, it will reload the page entirely. we will need to
+                use ajax in order to prevent that from happening. --> 
+                <% if (locals.items) { %>
+                    <% for(let i = 0; i < items.length; i++) { %>
+                        <div class="inputContainer hoverClass">
+                            <!-- onchange="this.form.submit()" -->
+                            <input type="checkbox" name="delete" id="checkbox" class="checkbox"  value="<%=items[i]%>">
+                                <!-- vale=items[i] is the value that will be returned to the server. --> 
+                            <label class="label" for="delete"> <%=items[i] %> </label>
+                        </div>
+                    <% } %>
+                <% } %> 
             </div>
         </div>
 
-        <div class="inputItem">
-            <form action="/newItem" method="post" class="row p-3 g-3">
+        <div class="inputItem" id="inputItem">
+            <div class="row p-3 g-3">
                 <div class="col-auto">
                     <input name="item" type="text" class="form-control-sm" id="newItem" placeholder="New Item">
                 </div>
                 <div class="col-auto">
                     <button name="enter" type="submit" id="btnEnter" class="btn btn-dark btn-sm">Enter</button>
                 </div>
-            </form>
+            </div>
 
             <form action="/returnItem" method="post">
                 <div class="col-auto">

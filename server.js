@@ -55,12 +55,13 @@ app.get("/", async (req, res) => {
 
 
 
-app.post("/newItem", (req, res) => {
+app.post("/newItem", jsonParser, (req, res) => {
    /*
    we are rendering index.ejs and we are passing the variable TITLE to it with the information
    gathered by the reques made by item in 
   */  
-    const newItem = req.body["item"];
+    //const newItem = req.body["item"];
+    const newItem = req.body.newItem;
     /*
         INSERT INTO <table> (column1, column2)
         VALUES (value1, value 2)
@@ -71,6 +72,7 @@ app.post("/newItem", (req, res) => {
 
 app.post("/deleteItem", jsonParser, (req, res) => {
     let dItem = req.body.items;
+    console.log(dItem);
     db.query("DELETE FROM list WHERE item=($1)", [dItem]);
     db.query("INSERT INTO deletedItems (item) VALUES ($1)", [dItem]);
     res.redirect("/");

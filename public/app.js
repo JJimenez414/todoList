@@ -25,37 +25,39 @@ $("body").on("change", "#checkbox", function() {
 
 });
 
-// $("#btnEnter").off("click").on("click", function(event){
-//     event.preventDefault()
-//     let newItem = $("#newItem").val();
-//     console.log("getting called twice");
-//     $("#newItem").val("");
+$("#btnEnter").off("click").on("click", function(event){
+    event.preventDefault()
+    let newItem = $("#newItem").val();
+    console.log("getting called twice");
+    $("#newItem").val("");
     
-//     $.ajax({
-//         type: "POST",
-//         url: "/newItem",
-//         async: true,
-//         contentType: "application/json",
-//         data: JSON.stringify({newItem: newItem}),
-//         success: function(res){
-//             $("#checkboxesContainer").html($(res).find("#checkboxesContainer").html());
-//         }
-//     })
-//         .done((data) => {
-//             console.log("Data: " + newItem);
-//         })
-//         .fail((err) => {
-//             console.error(err);
-//         })
-//         .always(() => {
-//             console.log("new always returned");
-//         });
-// });
+    $.ajax({
+        type: "POST",
+        url: "/newItem",
+        async: true,
+        contentType: "application/json",
+        data: JSON.stringify({newItem: newItem}),
+        success: function(res){
+            console.log("Response");
+            $("#checkboxesContainer").html($(res).find("#checkboxesContainer").html());
+        }
+    })
+        .done((data) => {
+            console.log("Data: " + newItem);
+        })
+        .fail((err) => {
+            console.error(err);
+        })
+        .always(() => {
+            console.log("new always returned");
+        });
+});
 
-$(".btnEnter").unbind("click").click(function(event) {
-    event.preventDefault();
-    console.log("click 2");
-})
+$("#test").click(function(event) {
+    event.stopPropagation();
+    console.log("hello world");
+});
+
 
 
 //if item is clicked we apply the checked class

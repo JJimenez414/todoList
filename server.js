@@ -62,6 +62,7 @@ app.post("/newItem", jsonParser, (req, res) => {
   */  
     //const newItem = req.body["item"];
     const newItem = req.body.newItem;
+    console.log("New Item: " + newItem);
     /*
         INSERT INTO <table> (column1, column2)
         VALUES (value1, value 2)
@@ -72,7 +73,7 @@ app.post("/newItem", jsonParser, (req, res) => {
 
 app.post("/deleteItem", jsonParser, (req, res) => {
     let dItem = req.body.items;
-    console.log(dItem);
+    console.log("Deleted Item: " + dItem);
     db.query("DELETE FROM list WHERE item=($1)", [dItem]);
     db.query("INSERT INTO deletedItems (item) VALUES ($1)", [dItem]);
     res.redirect("/");

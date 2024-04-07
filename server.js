@@ -23,6 +23,8 @@ const db = new pg.Client({
 
 db.connect();
 
+let id = 0;
+
 //get the list that you want and save it in result
 //SELECT <column> FROM <table>
 async function listOfItems() {
@@ -62,18 +64,18 @@ app.post("/newItem", jsonParser, (req, res) => {
   */  
     //const newItem = req.body["item"];
     const newItem = req.body.newItem;
-    console.log("New Item: " + newItem);
     /*
         INSERT INTO <table> (column1, column2)
         VALUES (value1, value 2)
     */
     db.query("INSERT INTO list (item) VALUES ($1)", [newItem]);
+    id =  db.query("SELECT id FROM list WHERE item = ($1)", [newItem]);
+    console.log("ID: " + id);
     res.redirect("/");
 });
 
 app.post("/deleteItem", jsonParser, (req, res) => {
     let dItem = req.body.items;
-    console.log("Deleted Item: " + dItem);
     db.query("DELETE FROM list WHERE item=($1)", [dItem]);
     db.query("INSERT INTO deletedItems (item) VALUES ($1)", [dItem]);
     res.redirect("/");

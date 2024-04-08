@@ -25,7 +25,7 @@ $("body").on("change", "#checkbox", function() {
 
 });
 
-$("#btnEnter").off("click").on("click", function(event){
+$("body").on("click", "#btnEnter", function(event){
     event.preventDefault()
     let newItem = $("#newItem").val();
     console.log("getting called twice");
@@ -49,15 +49,57 @@ $("#btnEnter").off("click").on("click", function(event){
             console.error(err);
         })
         .always(() => {
-            console.log("new always returned");
+            console.log("always returned");
         });
 });
 
-$("#test").click(function(event) {
-    event.stopPropagation();
-    console.log("hello world");
+$("body").on("click", "#btnNotes", function(){
+    let value = $("#notes").val();
+
+    $.ajax({
+        type:"POST",
+        url: "/note",
+        contentType: "application/json",
+        data: JSON.stringify({note: value}),
+        success: function(res) {
+            console.log("Response");
+        }
+    })
+        .done((data) => {
+            console.log("Done");
+        })
+        .fail((err) => {
+            console.log(err);
+        })
+        .always(() => {
+            console.log("always return")
+        });
 });
 
+$("body").on("click", ".label", function() {
+    let value = $(this).text().trim();
+    console.log(value);
+
+    $.ajax({
+        type: "POST",
+        url: "/selectNote",
+        contentType: "application/json",
+        data: JSON.stringify({item: value}),
+        success: function(res) {
+            console.log("Response");
+        }
+    })
+        .done((data) => {
+            console.log("Done");
+        })
+        .fail((err) => {
+            console.log(err);
+        })
+        .always(() => {
+            console.log("always return")
+        });
+
+});
 
 
 //if item is clicked we apply the checked class
@@ -76,7 +118,6 @@ $(".alertLabel").click(function() {
     //closest: findes the closest parent div to the element.
     //find: finds the elements that have the class .alertTodo.
     //addClass: adds the clas hide Items to the element.
-    console.log("click 2");
 
     if($(this).closest("div").find(".alertTodo").hasClass("hideItems"))
      {

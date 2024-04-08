@@ -49,6 +49,13 @@ async function listOfdItems() {
     return arrItems;
 }
 
+let itemId = 0;
+async function getId(item) {
+    let thisItem = item;
+    const result = await db.query("SELECT id FROM list WHERE item = ($1)", [thisItem]);
+    itemId = result.rows[0].id;
+}
+
 app.get("/", async (req, res) => {
     //call the function
     const Items = await listOfItems();
@@ -57,20 +64,20 @@ app.get("/", async (req, res) => {
 
 
 
-app.post("/newItem", jsonParser, (req, res) => {
+app.post("/newItem", jsonParser, async(req, res) => {
    /*
    we are rendering index.ejs and we are passing the variable TITLE to it with the information
    gathered by the reques made by item in 
   */  
-    //const newItem = req.body["item"];
     const newItem = req.body.newItem;
     /*
         INSERT INTO <table> (column1, column2)
         VALUES (value1, value 2)
     */
     db.query("INSERT INTO list (item) VALUES ($1)", [newItem]);
-    id =  db.query("SELECT id FROM list WHERE item = ($1)", [newItem]);
-    console.log("ID: " + id);
+    const id = await getId(newItem);
+    // get id
+    console.log("NEW ITEM ID: " + id);
     res.redirect("/");
 });
 
@@ -96,11 +103,18 @@ app.post("/returnItem", async (req,res) => {
     res.redirect('/');
 }); 
 
-app.post("/note", (req, res) => {
+app.post("/note", jsonParser, async (req, res) => {
     let note = req.body.note;
     console.log(note);
+    await db.query("INSERT INTO notes (id, note) VALUES ($1, $2)", [1, note]);
     res.redirect("/");
-})
+});
+
+app.post("/selectNote", jsonParser,  async (req,res) => {
+    let item = req.body.item;
+    await getId(item);
+    
+});
 
 
 

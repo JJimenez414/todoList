@@ -86,7 +86,8 @@ $("body").on("click", ".label", function() {
         contentType: "application/json",
         data: JSON.stringify({item: value}),
         success: function(res) {
-            console.log("Response");
+            console.log("RESPONSE NOTE: " + res.response);
+            $("#notes").html(res.response);
         }
     })
         .done((data) => {

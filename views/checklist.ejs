@@ -11,9 +11,7 @@
             <% if (locals.items) { %>
                 <% for(let i = 0; i < items.length; i++) { %>
                     <div class="inputContainer hoverClass">
-                        <!-- onchange="this.form.submit()" -->
                         <input type="checkbox" name="delete" id="checkbox" class="checkbox"  value="<%=items[i]%>">
-                            <!-- vale=items[i] is the value that will be returned to the server. --> 
                         <label class="label" for="delete" value="<%= items[i] %>"> <%=items[i] %> </label>
                     </div>
                 <% } %>

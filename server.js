@@ -75,14 +75,17 @@ app.post("/newItem", jsonParser, async(req, res) => {
         VALUES (value1, value 2)
     */
     db.query("INSERT INTO list (item) VALUES ($1)", [newItem]);
-    const id = await getId(newItem);
+    await getId(newItem);
     // get id
-    console.log("NEW ITEM ID: " + id);
+    console.log("NEW ITEM ID: " + itemId);
     res.redirect("/");
 });
 
-app.post("/deleteItem", jsonParser, (req, res) => {
+app.post("/deleteItem", jsonParser, async (req, res) => {
     let dItem = req.body.items;
+    await getId(dItem);
+    console.log("Item Id: " + itemId);
+    db.query("DELETE FROM notes WHERE id=($1)", [itemId]);
     db.query("DELETE FROM list WHERE item=($1)", [dItem]);
     db.query("INSERT INTO deletedItems (item) VALUES ($1)", [dItem]);
     res.redirect("/");
@@ -113,6 +116,10 @@ app.post("/note", jsonParser, async (req, res) => {
 app.post("/selectNote", jsonParser,  async (req,res) => {
     let item = req.body.item;
     await getId(item);
+    const information = await db.query("SELECT note FROM notes WHERE id = ($1)", [itemId])
+    console.log("INFO: " + information.rows[0].note);
+    console.log("ID: " + itemId);
+    res.send({response : information.rows[0].note});
     
 });
 

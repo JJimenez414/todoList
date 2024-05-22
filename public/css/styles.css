@@ -8,7 +8,7 @@ body {
     display: grid;
     width: 100%;
     height: 80vh;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .layoutBase {
@@ -56,7 +56,7 @@ body {
 .notes {
     height: 450px;
     width: 95%;
-    border-radius: 10%;
+    border-radius: 7%;
     border: solid 2px grey;
     margin-left: 10px;
     margin-top: 10px;
@@ -110,13 +110,13 @@ body {
 .inputContainer {
     margin-left: 40px;
     height: auto;
-    width: 350px;
+    width: 88%;
 }
 
 .label {
     padding-top: 3px;
-    margin-bottom: 10px;
-    width: 300px;
+    padding-bottom: 10px;
+    width: 90%;
 }
 
 input[type=checkbox] {
@@ -216,40 +216,6 @@ input[type=checkbox] {
 }
 
 
-/*allert section */
-
-.alertSection {
-    height: auto;
-    width: auto;
-    border-left: 2px solid black ;
-    border-bottom: 2px solid black;
-    margin: 10px;
-    padding: 10px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-.alertLabel {
-    padding: 0; 
-    margin: 0;
-    font-family: 'IBM Plex Mono', monospace;
-    
-}
-
-.hideItems {
-    display: none;
-    position: relative;
-}
-
-.alertTodo {
-    margin: 5px 0 0 0;
-}
 
 /*calander section */
-
-.calendar {
-    border-radius: 0;
-    grid-column: span 3;
-}
 

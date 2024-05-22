@@ -109,18 +109,31 @@ app.post("/returnItem", async (req,res) => {
 app.post("/note", jsonParser, async (req, res) => {
     let note = req.body.note;
     console.log(note);
-    await db.query("INSERT INTO notes (id, note) VALUES ($1, $2)", [1, note]);
+
+    const entryExists = await db.query("SELECT note FROM notes WHERE EXISTS (SELECT note FROM notes WHERE id = ($1))", [itemId]);
+    //console.log("ENTRY: " + JSON.stringify(entryExists, null, '\t'));
+
+    if (entryExists.rowCount == 0) {
+        await db.query("INSERT INTO notes (id, note) VALUES ($1, $2)", [itemId, note]);
+    } else {
+        await db.query("UPDATE notes SET note = ($1) WHERE id = ($2)", [note, itemId]);
+    }
     res.redirect("/");
 });
 
 app.post("/selectNote", jsonParser,  async (req,res) => {
     let item = req.body.item;
     await getId(item);
-    const information = await db.query("SELECT note FROM notes WHERE id = ($1)", [itemId])
-    console.log("INFO: " + information.rows[0].note);
-    console.log("ID: " + itemId);
-    res.send({response : information.rows[0].note});
-    
+
+    try {
+        const information = await db.query("SELECT note FROM notes WHERE id = ($1)", [itemId])
+        console.log("INFO: " + information.rows[0].note);
+        console.log("ITEM ID: " + itemId)
+        res.send({response : information.rows[0].note});
+    } catch (e) {
+        console.log("ITEM ID: " + itemId)
+        res.send({response: ""})
+    }
 });
 
 

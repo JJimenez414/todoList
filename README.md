@@ -7,7 +7,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-The purpose of this project, was to create somthing simple that helped me explore the world of Full Stack. Before this project my knowledge about HTML, CSS, and JavaScript was little to none. In order to learn efficiently, I decided to create a TodoList website. A todo list website might not be as significant; however, the knowledge I gained from this project was. Im not an expert, for sure, but now I know the basics of Full Stack which I can use to create future projects. Fell free to implement the project and add new features. 
+The purpose of this project, was to create somthing simple that helped me explore the world of Full Stack. Before this project my knowledge about HTML, CSS, and JavaScript was little to none. In order to learn efficiently, I decided to create a TodoList website. A todo list website might not be as significant; however, the knowledge I gained from this project was. Im not an expert, for sure, but now I know the basics of Full Stack which I can use to create future projects. Fell free to implement the project and add new features. It is to say that there are some code that is commented and some print statements. I left this in order to guide myself when ever I go back. I also used this project as a notebook of things I learned.
 
 I hope you enjoy and thank you.
 

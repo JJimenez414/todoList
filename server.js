@@ -13,6 +13,7 @@ app.use(express.static(__dirname + "/public"));
 //json parser
 var jsonParser = bodyParser.json();
 //connecting to db in from pgadmin
+//Hidden password and database for security reasons
 const db = new pg.Client({
     user: "postgres",
     host: "localhost",

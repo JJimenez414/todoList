@@ -16,8 +16,8 @@ var jsonParser = bodyParser.json();
 const db = new pg.Client({
     user: "postgres",
     host: "localhost",
-    database: "kakis",
-    password: "id130414",
+    database: "###",
+    password: "###",
     port: 5432
 });
 

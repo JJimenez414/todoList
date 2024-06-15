@@ -4,16 +4,11 @@
   <h3 align="center">TodoList</h3>
 </div>
 
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 The purpose of this project, was to create somthing simple that helped me explore the world of Full Stack. Before this project my knowledge about HTML, CSS, and JavaScript was little to none. In order to learn efficiently, I decided to create a TodoList website. A todo list website might not be as significant; however, the knowledge I gained from this project was. Im not an expert, for sure, but now I know the basics of Full Stack which I can use to create future projects. Fell free to implement the project and add new features. It is to say that there are some code that is commented and some print statements. I left this in order to guide myself when ever I go back. I also used this project as a notebook of things I learned.
 
 I hope you enjoy and thank you.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Built With
 
@@ -25,9 +20,6 @@ I hope you enjoy and thank you.
 * Node.JS
 * JavaScript
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -38,19 +30,13 @@ I hope you enjoy and thank you.
 
 This todo list app allows the user to add an item and add a note with the item as well. This note can be updated and edited when the user selects the item. 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 <!-- CONTACT -->
 ## Contact
 
 Jose Jimenez - [LinkedIn](https://www.linkedin.com/in/jose-angel-jimenez-537421290/) - joseangel130414@gmail.com
-
 Project Link: [TodoList](https://github.com/JJimenez414/todoList)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
